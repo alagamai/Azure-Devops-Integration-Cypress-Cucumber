@@ -8,7 +8,7 @@ steps:
    
    Write-Host "Hello World"
    
-   $webhookUrl = "https://hooks.slack.com/services/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"  # Replace with your Slack webhook URL
+   $webhookUrl = "https://hooks.slack.com/services/T05AF9UMt8B19455"  # Replace with your Slack webhook URL
    $message = "Build Started"
    
    $body = @{
@@ -48,7 +48,7 @@ steps:
 - task: kasunkodagoda.slack-notification.slack-notification-task.SlackNotification@6
   displayName: 'Post Slack Notification'
   inputs:
-    SlackApiToken: 'xoxp-5355334733190-5364427028820-5446498038208-07ac2c9113e1ec700a597636642fc8d1'
+    SlackApiToken: 'xoxp-5355334733a597636642fc8d1'
     Channel: '#qa, #slack-jenkins '
     Message: |
      Hi DEV team !!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -62,7 +62,7 @@ steps:
      
 
 - powershell: |
-   $webhookUrl = "https://hooks.slack.com/services/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"  # Replace with your Slack webhook URL
+   $webhookUrl = "https://hooks.slack.com/services/T0V91iet8B19455"  # Replace with your Slack webhook URL
    $message = "Build completed"
    
    $body = @{
