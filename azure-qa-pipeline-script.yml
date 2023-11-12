@@ -1,0 +1,80 @@
+pool:
+  name: Azure Pipelines
+  demands: npm
+
+steps:
+- powershell: |
+   # Write your PowerShell commands here.
+   
+   Write-Host "Hello World"
+   
+   $webhookUrl = "https://hooks.slack.com/services/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"  # Replace with your Slack webhook URL
+   $message = "Build Started"
+   
+   $body = @{
+       text = $message
+   }
+   Invoke-RestMethod -Uri $webhookUrl -Method Post -Body ($body | ConvertTo-Json)
+   
+  displayName: 'notify slack: Build Started'
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    verbose: false
+
+- task: Npm@1
+  displayName: 'Run regression script'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run test'
+  continueOnError: true
+
+- task: Npm@1
+  displayName: 'Convert json report to html port'
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: 'run to-html'
+  continueOnError: true
+
+- task: MaciejMaciejewski.azure-pipelines-cucumber.PublishCucumberReport.PublishCucumberReport@1
+  displayName: 'Publish Cucumber Report'
+  inputs:
+    jsonDir: 'cypress/cucumber-json'
+    outputPath: 'cypress/cucumber-json'
+
+- task: kasunkodagoda.slack-notification.slack-notification-task.SlackNotification@6
+  displayName: 'Post Slack Notification'
+  inputs:
+    SlackApiToken: 'xoxp-5355334733190-5364427028820-5446498038208-07ac2c9113e1ec700a597636642fc8d1'
+    Channel: '#qa, #slack-jenkins '
+    Message: |
+     Hi DEV team !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     Here is your regression report!  Fix the failed ones
+     https://dev.azure.com/alagamain/pipeline%20project/_build/results?buildId=$(Build.BuildNumber)&view=MaciejMaciejewski.azure-pipelines-cucumber.build-cucumber-tab
+    AuthorName: Alagammai
+    Title: 'Cucumber html report '
+    Text: |
+     Here is your regression report!  Fix the failed ones
+     https://dev.azure.com/alagamain/pipeline%20project/_build/results?buildId=$(Build.BuildNumber)&view=MaciejMaciejewski.azure-pipelines-cucumber.build-cucumber-tab
+     
+
+- powershell: |
+   $webhookUrl = "https://hooks.slack.com/services/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"  # Replace with your Slack webhook URL
+   $message = "Build completed"
+   
+   $body = @{
+       text = $message
+   }
+   Invoke-RestMethod -Uri $webhookUrl -Method Post -Body ($body | ConvertTo-Json)
+  displayName: 'notify slack: build completed'
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish Pipeline Artifact'
+  inputs:
+    targetPath: cypress/videos
+    artifact: 'publish videos'
+  continueOnError: true
+
