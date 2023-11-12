@@ -1,11 +1,12 @@
-Azure Pipeline Devops integration with Cypress + Cucumber  
+#Azure Pipeline Devops integration with Cypress + Cucumber  
 
-# Step by Step Guide To Run / Set-Up Cypress Tests in Azure DevOps Pipeline CI/CD
 # Prerequisites
 1.	You need to have already cypress framework up and running on your local machine
 2.	Cypress Project should be checked into the repository with visibility set to private 
 3.	Your framework should generate a cucumber report 
 
+
+# Step by Step Guide To Run / Set-Up Cypress Tests in Azure DevOps Pipeline CI/CD
 Step 1:  Create a Github service connection 
 Select github
 Select project -> Project settings -> New  service connection -> search for Github -> click on next -> select Oauth configuration -> Azure pipelines
