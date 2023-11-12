@@ -35,20 +35,18 @@ Select Agent specification as – macos-latest
 
 Step 5: Add powershell script
 Select powershell script path  or add inline script
-
-	
 Add webhook url into the script 
-# Write your PowerShell commands here.
+Write your PowerShell commands here.
 
-Write-Host "Hello World"
+	Write-Host "Hello World"
 
-$webhookUrl = "https://hooks.slack.com/services/T05AF19455"  # Replace with your Slack webhook URL
+	$webhookUrl = "https://hooks.slack.com/services/T05AF19455"  # Replace with your Slack webhook URL
 $message = "Build Started"
 
-$body = @{
-    text = $message
-}
-Invoke-RestMethod -Uri $webhookUrl -Method Post -Body ($body | ConvertTo-Json)
+	$body = @{
+    	text = $message
+	}
+	Invoke-RestMethod -Uri $webhookUrl -Method Post -Body ($body | ConvertTo-Json)
 
 step 6: To configure a Slack webhook URL, follow these steps:
 1.	Sign in to your Slack workspace (or create a new one if you don't have an account).
@@ -79,4 +77,8 @@ Click on save and queue -> to save and run
 
  
  # Screenshots
-[![Cucumber report](https://github.com/alagamai/cypress-bdd-cucumber-pom-framework/blob/main/cypress/link-to-readme/Cloud-Dashboard-Report.png)]
+[![Classic-Editor](https://github.com/alagamai/Azure-Devops-Integration-Cypress-Cucumber/blob/master/images/Classic-editor-Agent-Job.png)]
+[![Publish-Artifacts](https://github.com/alagamai/Azure-Devops-Integration-Cypress-Cucumber/blob/master/images/Publish-Artifacts.png)]
+[![Slack-Notification](https://github.com/alagamai/Azure-Devops-Integration-Cypress-Cucumber/blob/master/images/Slack-Notification.png)]
+[![classic-editor-pipeline-script](https://github.com/alagamai/Azure-Devops-Integration-Cypress-Cucumber/blob/master/images/classic-editor-pipeline-script.png)]
+[![cucumber-report](https://github.com/alagamai/Azure-Devops-Integration-Cypress-Cucumber/blob/master/images/cucumber-report.png)]
