@@ -1,4 +1,4 @@
-# Azure Pipeline Devops integration with Cypress + Cucumber  
+Azure Pipeline Devops integration with Cypress + Cucumber  
 
 # Step by Step Guide To Run / Set-Up Cypress Tests in Azure DevOps Pipeline CI/CD
 # Prerequisites
@@ -11,17 +11,24 @@ Select github
 Select project -> Project settings -> New  service connection -> search for Github -> click on next -> select Oauth configuration -> Azure pipelines
 Click on authorize
 Or connect using PAT 
+
 How to generate token with github
 a.	Go to profile -> settings -> Developer settings
+
 b.	Personal access token -> token (classic)
+
 c.	New personal access token (classic)
+
 d.	Repository access – public repo 
+
 e.	Generate token 
+
 f.	Copy token  
+
 Go to project settings ->.Github connection -> link private repo 
 Confirm access 
 select repository access
-Approve and installi
+Approve and install
 
 Step 2: Create a New Pipeline
 Go to  https://dev.azure.com/
@@ -41,7 +48,7 @@ Write your PowerShell commands here.
 	Write-Host "Hello World"
 
 	$webhookUrl = "https://hooks.slack.com/services/T05AF19455"  # Replace with your Slack webhook URL
-$message = "Build Started"
+	$message = "Build Started"
 
 	$body = @{
     	text = $message
